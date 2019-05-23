@@ -8,4 +8,10 @@ Simple scenario: extract data from Db2 for i or a CSV file, and create and prepa
 
 This model can be tested and evaluated, and persisted on disk on IBM i for inference, or externalize on an accelerated server or even Watson Machine Learning (on prems, Cloud).
 
+## How to run the demo? 
+Simply launch ipython from a bash shell.  Then type run -i %<FILE-NAME.py>  , where FILE-NAME.py is the name of each python script from step 0 to 16. Respect the order, as each script depends on the previous one.
+Once the model created and persisted, you can simply invoke the inference part, as shown in script 20_*.py
+
+Next: A version with jupyter (web IDE for python & R) instead of ipython as an interactive python environment.
+
 More information on AI Solutions and ML/DL on IBM i [here](https://t.co/3QFohFlmIR)
