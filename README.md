@@ -16,4 +16,4 @@ You can use IBM ACS to create a Db2 table from the CSV and use the 0_load_Datase
 
 Next: A version with jupyter (web IDE for python & R) instead of ipython as an interactive python environment.
 
-More information on AI Solutions and ML/DL on IBM i [here](https://t.co/3QFohFlmIR)
+More information on ML/DL Solutions on IBM Systems & Cloud, including IBM i [here](https://t.co/3QFohFlmIR)
