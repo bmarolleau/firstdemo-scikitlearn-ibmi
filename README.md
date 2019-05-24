@@ -7,6 +7,11 @@ This demo uses a Python 3.6 env, scikit-learn, ipython.
 Simple scenario: extract data from Db2 for i or a CSV file, and create and prepare your datasets, create a supervised classification model (https://scikit-learn.org/stable/modules/svm.html) .
 
 This model can be tested and evaluated, and persisted on disk on IBM i for inference, or externalize on an accelerated server or even Watson Machine Learning (on prems, Cloud).
+The model is stored in the SVC_Model_CHURN_IBMi_V1.joblib file here, with an accuracy of 0.8, recall 0.7. Room for improvement.
+
+A complete presentation will be shared in the link below.
+
+More information on ML/DL Solutions on IBM Systems & Cloud, including IBM i [here](https://t.co/3QFohFlmIR)
 
 ## How to run the demo? 
 Simply launch ipython from a bash shell.  Then type run -i %<FILE-NAME.py>  , where FILE-NAME.py is the name of each python script from step 0 to 16. Respect the order, as each script depends on the previous one.
@@ -16,4 +21,3 @@ You can use IBM ACS to create a Db2 table from the CSV and use the 0_load_Datase
 
 Next: A version with jupyter (web IDE for python & R) instead of ipython as an interactive python environment.
 
-More information on ML/DL Solutions on IBM Systems & Cloud, including IBM i [here](https://t.co/3QFohFlmIR)
