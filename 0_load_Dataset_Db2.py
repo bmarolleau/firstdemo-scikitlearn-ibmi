@@ -3,7 +3,7 @@ import pandas as pd
 
 # Telco Churn dataset from a CRM datasource - here Db2 for i in CHURN/CUSTCHURN2 7044 records
 
-sql="SELECT * from CHURN.CUSTCHURN2"
+sql="SELECT * from CHURN.CUSTCHURN3"
 pd.set_option('display.max_columns', 30)
 try:
     conn = dbi.connect()
