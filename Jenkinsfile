@@ -1,1 +1,1 @@
-sh 'echo hello'
+echo "Hello. Building App..."
