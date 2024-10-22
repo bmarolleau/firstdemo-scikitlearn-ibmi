@@ -1,6 +1,3 @@
-scikit_learn
 joblib
-matplotlib 
-numpy
-scipy
+matplotlib==3.2 
 seaborn
