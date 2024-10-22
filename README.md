@@ -24,24 +24,48 @@ In this simple scenario, we manage to get an accuracy of 0.8, recall 0.7, which 
 
 ## How to use this repository ? 
 
-This demo uses a Python 3.6, scikit-learn (pandas, seaborn, matplotlib) , jupyter or ipython. It can upgraded to more recent Python versions, but make sure your dependencies are aligned with the chosen Python version. 
+This asset demonstrates the use of open-source Python technologies to visualize DB2 for i data with dashboards, use your data to create predictive scoring with regression algorithms, or classification, all on IBM i. This application uses scikit-learn, pandas, seaborn, matplotlib libraries , jupyter and ipython. 
 
-### Setup Overview
--  Git clone this repository on your system 
--  Install the required packages (yum install, pip install) . Please refer to the setup_instruction.md  
 -  Simply launch jupyter on your machine  
 ```jupyter notebook --port 8888 --ip <your-ip>``` 
 -  Python/IPython step by step alternative: Execute python scripts sequentially or use Interactive python with  ``` run -i %<FILE-NAME.py> ```  , where FILE-NAME.py is the name of each python script from step 0 to 20. Respect the order, as each script depends on the previous one. 
+
+### Python version
+This application can upgraded to more recent Python versions available on IBM i. Just make sure your dependencies are aligned with the chosen Python version. 
+
+IBM i yum repositories include pre-compiled python packages for Python 3.6 and 3.9. For python 3.6:  ```python3-numpy v1.15.4 , python3-Pillow v5.0.0 , python3-pandas v0.22.0 , python3-scipy v1.1.0, python3-scikit-learn v1.0.1``` for ppc64 architecture. These packages will be installed during the setup process detailed below. 
+-  Please note that we install here all  ```python3-* ```packages (python version 3.6)  and GCC version 10 is mandatory, so make sure gcc points to gcc 10 on your system or inside your chroot  ( ```gcc -v``` , use ```ln -s gcc-10 /QOpenSys/pkgs/bin/gcc``` if necessary). 
+- GCC 10 is required to compile various python dependencies to avoid headers conflict like "time.h:124:3: error: conflicting types for 'sigset_t'"  when using GCC 6. 
+-  If you use a chroot container, note that we use in step 3 a custom chroot_setup_script.sh script that normally resides in ```/QOpenSys/QIBM/ProdData/SC1/OpenSSH/sbin/chroot_setup_script.sh``` that we modified to be able to specify a ```CHROOT_PATH``` . Please let me know if there is an easier process with chroot_setup or other standard scripts ^^ 
+### Dataset 
 - Dataset used is the CSV file ``` WA_Fn-UseC_-Telco-Customer-Churn.csv```  in that particular example. You can use IBM ACS to create a Db2 table from the CSV and use the ```0_load_Dataset_Db2.py```  to load the data from this table.
 
-### Setup Details : IBM i & Machine Learning setup instructions
-
-Notes
--------
--  Please note that we installed here all  ```python3-* ```packages (python version 3.6)  and GCC version 10 is mandatory, so make sure gcc points to gcc 10 inside your chroot  ( ```gcc -v``` , use ```ln -s gcc-10 /QOpenSys/pkgs/bin/gcc``` if necessary)  or on your system if you decide to run in the IFS / without chroot. GCC 10 is required to compile ```argon2-cffi-bindings``` python 3.6 package (headers conflict time.h:124:3: error: conflicting types for 'sigset_t' when using GCC 6)
--  I used in step 3 a custom chroot_setup_script.sh script that normally resides in ```/QOpenSys/QIBM/ProdData/SC1/OpenSSH/sbin/chroot_setup_script.sh``` that I modified to be able to specify to ```CHROOT_PATH``` . Please let me know if there is an easier process with chroot_setup or other standard scripts.
+## Setup Details : IBM i & Machine Learning setup instructions
  
- Step by step instructions:
+1/ Install packages (yum)
+``` bash
+yum install tcl tk python39 python39-* libzmq libffi-devel.ppc64 libffi6.ppc64 gcc10.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64
+```
+2/ Install python packages
+``` bash
+pip3.6 install -r requirements
+```
+3/ Start Jupyterlab 
+``` bash
+jupyter notebook --port 8888 --ip <YOURIP>
+```
+4/ Open the notebook you previously cloned on your IBM i. Then, refer to this [Jupyter Notebook](https://github.com/bmarolleau/firstdemo-scikitlearn-ibmi/blob/master/Churn-IBMi.ipynb) for more instructions on how to get started with scikit learn.
+![jupyter ibmi landing page](./pictures/jupyter-landingpage.jpg)
+
+## Reference links (chroot, Machine learning etc.)
+
+- [IBM Documentation: chroot and ssh ](https://www.ibm.com/support/pages/using-chroot-ibm-i-restrict-ssh-sftp-and-scp-specific-directories)
+- [ IFS containers ](https://techchannel.com/open-source-on-ibm-i/getting-started-with-ifs-containers/)
+- [IBM i OSS](https://ibm.github.io/ibmi-oss-resources/)
+- [scikit learn](https://scikit-learn.org/stable/)
+
+
+Bonus -  Step by step instructions in a chroot container:
 -------
 1/ Install ibmichroot  – each user will be using a "chroot jail" :
  ``` bash
@@ -67,7 +91,7 @@ Notes
  ``` 
 6/ Install ML packages (400/500 MB)
 ``` bash
-[17:07:09][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# yum install --installroot  /QOpenSys/mop_chroots/container-ml tcl tk python3 python3-* libzmq openssl bash libffi-devel.ppc64 libffi6.ppc64 gcc10.ppc64 git
+[17:07:09][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# yum install --installroot  /QOpenSys/mop_chroots/container-ml tcl tk python3 python3-* libzmq openssl bash libffi-devel.ppc64 libffi6.ppc64 gcc10.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64
 ```
  
 7/  Check GCC version in chroot -  GCC V10 required here
@@ -82,7 +106,7 @@ Notes
  
 9/  Install Python packages in CHROOT
 ``` bash
-[22:40:20][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# chroot /QOpenSys/mop_chroots/container-ml pip3.6 install jupyterlab joblib
+[22:40:20][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# chroot /QOpenSys/mop_chroots/container-ml pip3.6 install -r requirements
 ```
 10/ git clone this repository in the chroot directory 
 ``` bash
@@ -107,10 +131,4 @@ mlusr1@localhost's password:
 [I 22:45:29.967 NotebookApp] http://<YOURIP>:8888/?token=bdee0196a3cf9fb13ef7a95847ad68f0328debdbc749
 ```
 12/ From Jupyterlab Web UI (web browser) , open the notebook you previously cloned on your IBM i. Then, refer to this [Jupyter Notebook](https://github.com/bmarolleau/firstdemo-scikitlearn-ibmi/blob/master/Churn-IBMi.ipynb) for more instructions on how to get started with scikit learn.
-
-## Reference links (chroot, Machine learning etc.)
-
-- [IBM Documentation: chroot and ssh ](https://www.ibm.com/support/pages/using-chroot-ibm-i-restrict-ssh-sftp-and-scp-specific-directories)
-- [ IFS containers ](https://techchannel.com/open-source-on-ibm-i/getting-started-with-ifs-containers/)
-- [IBM i OSS](https://ibm.github.io/ibmi-oss-resources/)
-- [scikit learn](https://scikit-learn.org/stable/)
+![jupyter ibmi landing page](./pictures/jupyter-landingpage.jpg)
