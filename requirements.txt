@@ -1,3 +1,4 @@
 joblib
 matplotlib==3.2 
 seaborn
+jupyterlab
