@@ -28,7 +28,7 @@ Use the Python standalone scripts in the [scripts](./scripts/) folder for runnin
 
 ## How to use this repository ? 
 
-This asset demonstrates the use of open-source Python technologies to visualize DB2 for i data with dashboards, use your data to create predictive scoring with regression algorithms, or classification, all on IBM i. This application uses scikit-learn, pandas, seaborn, matplotlib libraries , jupyter and ipython. 
+This asset demonstrates the use of open-source Python technologies to visualize DB2 for i data with dashboards, use your data to create predictive scoring with regression algorithms, or classification, all on IBM i. This application uses scikit-learn, pandas, seaborn, matplotlib , jupyter and ipython. 
 
 -  Simply launch jupyter on your machine  
 ```jupyter notebook --port 8888 --ip <your-ip>``` 
@@ -41,11 +41,11 @@ This asset demonstrates the use of open-source Python technologies to visualize 
  
 1/ Install necessary packages (yum)
 ``` bash
-yum install tcl tk python39 python39-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++ cmake
+yum install tcl tk python3 python3-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++ cmake
 ```
 2/ Install python packages
 ``` bash
-pip3.9 install -r requirements
+pip3.6 install -r requirements
 ```
 3/ Start Jupyterlab 
 ``` bash
@@ -62,13 +62,13 @@ jupyter notebook --port 8888 --ip <YOURIP>
 - [scikit learn](https://scikit-learn.org/stable/)
 
 ## Notes - Dependencies and python version
-This application can upgraded to more recent Python versions available on IBM i. Just make sure your dependencies are aligned with the chosen Python version. 
+This application can upgraded to more recent Python versions available on IBM i. Just make sure your dependencies are aligned with the chosen Python version. The code has been tested with Python 3.6. Python 3.9 may require a Rust Compiler on IBM i, that is not yet available.
 
 IBM i yum repositories include pre-compiled python packages for Python 3.6 and 3.9. For python 3.6:  ```python3-numpy v1.15.4 , python3-Pillow v5.0.0 , python3-pandas v0.22.0 , python3-scipy v1.1.0, python3-scikit-learn v1.0.1``` , ppc64 architecture. These packages will be installed during the setup process detailed below. 
--  Please note that we install here all  ```python39-* ```packages (python version 3.6)  and GCC version 10+ is mandatory, so make sure gcc points to gcc 10 on your system or inside your chroot  ( ```gcc -v``` , use ```ln -s gcc-10 /QOpenSys/pkgs/bin/gcc``` if necessary). 
+-  Please note that we install here all  ```python3-* ```packages (python version 3.6)  and GCC version 10+ is mandatory, so make sure gcc points to gcc 10 on your system or inside your chroot  ( ```gcc -v``` , use ```ln -s gcc-10 /QOpenSys/pkgs/bin/gcc``` if necessary). 
 - GCC 10 is required to compile various python dependencies to avoid headers conflict like "time.h:124:3: error: conflicting types for 'sigset_t'"  when using GCC 6. 
 -  If you use a chroot container, note that we use in step 3 a custom chroot_setup_script.sh script that normally resides in ```/QOpenSys/QIBM/ProdData/SC1/OpenSSH/sbin/chroot_setup_script.sh``` that we modified to be able to specify a ```CHROOT_PATH``` . Please let me know if there is an easier process with chroot_setup or other standard scripts ^^ 
-- Here, requirements.txt mentions matplotlib version 3.2, which compiles fine. Feel free to upgrade matplotlib to a more recent version adapting the dependency list accordinlgy.
+- Here, requirements.txt mentions matplotlib version 3.2, which compiles fine. Feel free to upgrade matplotlib to a more recent version adapting the dependency list accordinlgy. Install/Compilation is CPU intensive so make sure to size your system accordingly.
 
 Bonus -  Step by step instructions in a chroot container:
 -------
@@ -96,7 +96,7 @@ Bonus -  Step by step instructions in a chroot container:
  ``` 
 6/ Install ML packages (400/500 MB)
 ``` bash
-[17:07:09][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# yum install --installroot  /QOpenSys/mop_chroots/container-ml tcl tk python39 python39-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++ cmake
+[17:07:09][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# yum install --installroot  /QOpenSys/mop_chroots/container-ml tcl tk python3 python3-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++ cmake
 ```
  
 7/  Check GCC version in chroot -  GCC V10 required here
@@ -111,7 +111,7 @@ Bonus -  Step by step instructions in a chroot container:
  
 9/  Install Python packages in CHROOT
 ``` bash
-[22:40:20][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# chroot /QOpenSys/mop_chroots/container-ml pip3.9 install -r requirements
+[22:40:20][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# chroot /QOpenSys/mop_chroots/container-ml pip3.6 install -r requirements
 ```
 10/ git clone this repository in the chroot directory 
 ``` bash
