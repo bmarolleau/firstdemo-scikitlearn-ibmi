@@ -9,10 +9,14 @@ Proposed scenario: In this notebook:
 3) visualize data
 4) create a supervised classification model (https://scikit-learn.org/stable/modules/svm.html) . 
 
-Resulting model can be tested and evaluated, and persisted on disk on IBM i for inference, or exported on an accelerated server or even Watson Machine Learning (on prems, Cloud).
-It is persisted on disk using joblib (pip install joblib)  in the SVC_Model_CHURN_IBMi_V1.joblib file on the IFS file system.
+Resulting model can be tested and evaluated, and persisted on disk on IBM i for inference, or exported on an accelerated server or even Watson Machine Learning (on prems, Cloud). It is persisted on disk using joblib (pip install joblib)  in the SVC_Model_CHURN_IBMi_V1.joblib file on the IFS file system.
 
 In this simple scenario, we manage to get an accuracy of 0.8, recall 0.7, which is good starting point!! 
+
+The code can be found in the [Jupyter Notebook](https://github.com/bmarolleau/firstdemo-scikitlearn-ibmi/blob/master/Churn-IBMi.ipynb) for interactive execution and data visualization. 
+
+Use the Python standalone scripts in the [scripts](./scripts/) folder for running the demo in 'batch' mode, closer to real life scenario. 
+
 
 ## Documentation
 - Main asset of this repo is this [Jupyter Notebook](https://github.com/bmarolleau/firstdemo-scikitlearn-ibmi/blob/master/Churn-IBMi.ipynb)
