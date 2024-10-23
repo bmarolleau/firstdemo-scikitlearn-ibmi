@@ -41,7 +41,7 @@ This asset demonstrates the use of open-source Python technologies to visualize 
  
 1/ Install necessary packages (yum)
 ``` bash
-yum install tcl tk python39 python39-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++
+yum install tcl tk python39 python39-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++ cmake
 ```
 2/ Install python packages
 ``` bash
@@ -96,7 +96,7 @@ Bonus -  Step by step instructions in a chroot container:
  ``` 
 6/ Install ML packages (400/500 MB)
 ``` bash
-[17:07:09][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# yum install --installroot  /QOpenSys/mop_chroots/container-ml tcl tk python3 python3-* libzmq openssl bash libffi-devel.ppc64 libffi6.ppc64 gcc10.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64
+[17:07:09][DEMOP.IBM.COM][/QOpenSys/mop_chroots]# yum install --installroot  /QOpenSys/mop_chroots/container-ml tcl tk python39 python39-* libzmq libffi6.ppc64 git ca-certificates-mozilla.noarch ca-certificates.noarch vim.ppc64 ninja* *-devel *blas *libstd* libpng* pkg-config libfreetype6 gcc* gcc-c++ cmake
 ```
  
 7/  Check GCC version in chroot -  GCC V10 required here
