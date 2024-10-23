@@ -1,7 +1,7 @@
 # IBM i & Machine Learning 101
 ###  "firstdemo-scikitlearn-ibmi" repository
 
-How to simply use machine learning on IBM ? this repository illustrates the use of real time scoring and data visualization open source technologies on IBM i (aka AS/400), close to business critical applications and data. 
+How to simply use machine learning on IBM i ? this repository illustrates the use of real time scoring and data visualization open source technologies on IBM i, close to business critical applications and data. #IBMi #AI #watsonx #AS400 
 
 Proposed scenario: In this notebook: 
 1) extract data from Db2 for i or a CSV file, 
